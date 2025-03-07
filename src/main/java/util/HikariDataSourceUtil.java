@@ -19,9 +19,9 @@ public class HikariDataSourceUtil {
 					HikariConfig hikariConfig = new HikariConfig();
 					hikariConfig.setDriverClassName("com.mysql.cj.jdbc.Driver");
 					//not a http connection, it is a jdbc connection to mysql server
-					//wrong: hikariConfig.setJdbcUrl("http://localhost:3306/studenttribedb");
+					//wrong: hikariConfig.setJdbcUrl("http://localhost:3306/rakeshdb");
 					//correct version:
-					hikariConfig.setJdbcUrl("jdbc:mysql://localhost:3306/studenttribedb");
+					hikariConfig.setJdbcUrl("jdbc:mysql://localhost:3306/rakeshdb");
 					hikariConfig.setUsername("root");
 					hikariConfig.setPassword("root");
 					hikariConfig.setMaximumPoolSize(5);
