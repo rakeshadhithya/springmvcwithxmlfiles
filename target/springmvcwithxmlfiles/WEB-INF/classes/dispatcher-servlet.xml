@@ -1,0 +1,45 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/mvc 
+                           http://www.springframework.org/schema/mvc/spring-mvc.xsd
+                           http://www.springframework.org/schema/context 
+                           http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--handlermapper-->
+    <bean id="handlerMapper" class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
+    <!--static resources mapping. any request starting with static/ will find that resource in location-->
+    <mvc:resources mapping="/static/**" location="/static/" />
+
+
+    <!--viewresovler-->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+
+    <!-- beans(mainly controllers) for context in dispatcher servlet -->
+    <bean id="/home" class="controller.HomeController" />
+
+
+    <!-- Configure the mappings manually for MultiActionController -->
+    <bean id="employeeController" class="controller.EmployeeController">
+        <constructor-arg ref="employeeService"/>
+    </bean>
+
+    <bean id="simpleUrlHandlerMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <map>
+                <entry key="/findAll" value-ref="employeeController"/>
+                <entry key="/findById" value-ref="employeeController"/>
+                <entry key="/save" value-ref="employeeController"/>
+                <entry key="/update" value-ref="employeeController"/>
+                <entry key="/delete" value-ref="employeeController"/>
+            </map>
+        </property>
+    </bean>
+</beans>
